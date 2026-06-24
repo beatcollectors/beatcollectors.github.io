@@ -1,0 +1,204 @@
+:root {
+    --bg-color: #0a0a0a;
+    --accent-color: #ffffff;
+    --text-grey: #888;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--accent-color);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 10%;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Hero Section */
+/* Ensure the header acts as the anchor for the absolute elements */
+header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden; /* Keeps the massive video from spilling out */
+}
+
+/* Force the YouTube iframe to stretch and cover the header */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* Prevents users from clicking/pausing the background */
+}
+
+.video-background iframe {
+    width: 100vw;
+    height: 56.25vw; /* Given a 16:9 aspect ratio */
+    min-height: 100vh;
+    min-width: 177.77vh; /* Given a 16:9 aspect ratio */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the cropped video */
+}
+
+/* The dark vignette overlay so your band name is easy to read */
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.65); /* Adjust the 0.65 to make it darker or lighter */
+    z-index: 2;
+}
+
+/* Push your typography above the video and overlay layers */
+.hero-content {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-content h1 {
+    font-size: 8vw;
+    font-weight: 900;
+    letter-spacing: -4px;
+    margin-bottom: 1rem;
+}
+
+/* Videos Section */
+#videos {
+    padding: 100px 10%;
+}
+
+.section-title {
+    font-size: 1rem;
+    letter-spacing: 5px;
+    color: var(--text-grey);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    gap: 20px;
+}
+
+.video-card {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    background: #1a1a1a;
+}
+
+.video-card iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+}
+
+.video-card iframe:hover {
+    filter: grayscale(0%);
+}
+
+/* Contact */
+#contact {
+    padding: 100px 10%;
+    text-align: center;
+    border-top: 1px solid #222;
+}
+
+.contact-wrap h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.socials {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.socials a {
+    color: var(--text-grey);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.7rem;
+    color: #444;
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .video-grid { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 15vw; }
+}
+
+/* Specifically target the email link in the contact wrap */
+.contact-wrap p a {
+    color: var(--accent-color); /* This uses the white defined in :root */
+    text-decoration: underline; /* Standard for emails, or use 'none' for cleaner look */
+    font-weight: bold;
+}
+
+.contact-wrap p a:hover {
+    color: var(--text-grey); /* Subtle feedback when hovering */
+}
